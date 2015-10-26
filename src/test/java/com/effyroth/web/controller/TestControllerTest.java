@@ -40,8 +40,11 @@ public class TestControllerTest {
                 "dubbo-consumer.xml"
         );
         context.start();
-        TestService.Iface testService = (TestService.Iface)context.getBean("testService");
+        TestService testService = (TestService)context.getBean("testService");
         TestObject testObject = testService.testMethod(1L, "test", false);
+        System.out.println(testObject.getTestString());
+        System.out.println(testObject.isTestBool());
+        System.out.println(testObject.getTestLong());
 //        log.debug(testObject.toString());
     }
 
@@ -58,7 +61,7 @@ public class TestControllerTest {
                 "dubbo-consumer.xml"
         );
         context.start();
-        TestService.Iface testService = (TestService.Iface)context.getBean("testService");
+        TestService testService = (TestService)context.getBean("testService");
         testService.testPing();
     }
 

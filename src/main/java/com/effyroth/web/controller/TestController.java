@@ -1,9 +1,7 @@
 package com.effyroth.web.controller;
 
-import com.effyroth.core.exceptions.TestException;
 import com.effyroth.core.services.TestService;
 import com.effyroth.core.structs.TestObject;
-import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,7 @@ public class TestController {
     private final Logger log = LoggerFactory.getLogger(TestController.class);
 
     @Autowired
-    TestService.Iface testService;
+    TestService testService;
 
     @RequestMapping(value="/test", method = RequestMethod.GET)
     public ModelAndView Test(){
@@ -33,7 +31,7 @@ public class TestController {
         String pong = null;
         try {
             pong = testService.testPing();
-        } catch (TException e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             log.error(e.toString());
         }
@@ -41,11 +39,7 @@ public class TestController {
         TestObject testObject = null;
         try {
             testObject = testService.testMethod(1L,"thrift test", true);
-        } catch (TestException e) {
-            log.error(e.getMessage());
-            log.error(e.toString());
-            e.printStackTrace();
-        } catch (TException e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             log.error(e.toString());
             e.printStackTrace();

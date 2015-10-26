@@ -10,8 +10,6 @@
 
     <dubbo:registry address="zookeeper://127.0.0.1:2181" client="zkclient"/>
 
-    <dubbo:protocol name="thrift" />
-
-    <dubbo:reference id="testService" interface="com.effyroth.core.services.TestService$Iface" timeout="1000" />
+    <dubbo:reference id="testService" interface="com.effyroth.core.services.TestService"/>
 
 </beans>

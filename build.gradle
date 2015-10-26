@@ -23,6 +23,20 @@ repositories {
     mavenCentral()
 }
 
+//configurations {
+//    provided
+//    provided.extendsFrom(compile)
+//}
+
+configurations{
+    myJettyRuntime
+}
+
+//idea {
+//    module {
+//        scopes.PROVIDED.plus += [configurations.provided]
+//    }
+//}
 //env = System.getProperty("env")?:"dev"
 
 //sourceSets {
@@ -35,6 +49,7 @@ repositories {
 //}
 
 jettyRun{
+    classpath = configurations.myJettyRuntime
     contextPath = ""
     httpPort = 8080
 }
@@ -45,6 +60,8 @@ jettyRun{
 //}
 
 dependencies {
+    myJettyRuntime "group:name:version"
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile 'javax.servlet:javax.servlet-api:3.1.0'
     compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
@@ -59,7 +76,6 @@ dependencies {
     compile 'com.101tec:zkclient:0.6'
 
 //    compile("org.springframework.boot:spring-boot-starter-web:1.2.7.RELEASE")
-    compile 'org.apache.thrift:libthrift:0.9.1'
     compile project(':core')
     compile 'commons-lang:commons-lang:2.6'
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration  -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user             -->
+<!--                                                                -->
+<!-- For professional support please see                            -->
+<!--    http://www.qos.ch/shop/products/professionalSupport         -->
+<!--                                                                -->
+<configuration>
+    <appender name="jettyAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- Tests run on modern PCs show that buffering related property -->
+        <!-- "ImmediateFlush" has negligible impact and will be ignored.  -->
+        <encoder>
+            <pattern>[%-5p][%t][%r ms][%d{yyyyMMdd HH:mm:ss}]%m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="effyrothAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- Tests run on modern PCs show that buffering related property -->
+        <!-- "ImmediateFlush" has negligible impact and will be ignored.  -->
+        <encoder>
+            <pattern>[%-5p][%t][%r ms][%d{yyyyMMdd HH:mm:ss}]%c%L:%m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- Tests run on modern PCs show that buffering related property -->
+        <!-- "ImmediateFlush" has negligible impact and will be ignored.  -->
+        <encoder>
+            <pattern>[%-5p][%t][%r ms][%d{yyyyMMdd HH:mm:ss}]%m%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.eclipse.jetty" additivity="false" level="INFO">
+        <appender-ref ref="jettyAppender"/>
+    </logger>
+    <logger name="com.effyroth" level="DEBUG">
+        <appender-ref ref="effyrothAppender"/>
+    </logger>
+    <root level="INFO">
+        <appender-ref ref="consoleAppender"/>
+    </root>
+</configuration>

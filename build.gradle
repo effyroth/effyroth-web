@@ -1,0 +1,70 @@
+group 'effyroth'
+version '1.0-SNAPSHOT'
+
+//buildscript {
+//    dependencies {
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.7.RELEASE")
+//    }
+//    repositories {
+//        maven.url "http://repo.spring.io/snapshot"
+//        maven.url "http://repo.spring.io/milestone"
+//    }
+//}
+//apply plugin: 'spring-boot'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: "idea"
+apply plugin: "jetty"
+
+sourceCompatibility = 1.6
+
+repositories {
+    mavenCentral()
+}
+
+//env = System.getProperty("env")?:"dev"
+
+//sourceSets {
+//    main {
+//        resources {
+//            srcDirs = ["src/main/resources/public","src/main/resources/$env"]
+//        }
+//
+//    }
+//}
+
+jettyRun{
+    contextPath = ""
+    httpPort = 8080
+}
+//
+//jettyRunWar{
+//    contextPath = ""
+//    httpPort = 8080
+//}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
+    compile 'javax.servlet:jstl:1.2'
+//    compile 'org.slf4j:slf4j-api:1.7.12'
+//    compile 'org.slf4j:slf4j-log4j12:1.7.12'
+//    compile 'log4j:log4j:1.2.17'
+
+    compile('com.alibaba:dubbo:2.5.3'){
+        exclude module: 'spring'
+    }
+    compile 'com.101tec:zkclient:0.6'
+
+//    compile("org.springframework.boot:spring-boot-starter-web:1.2.7.RELEASE")
+    compile 'org.apache.thrift:libthrift:0.9.1'
+    compile project(':core')
+    compile 'commons-lang:commons-lang:2.6'
+
+}
+
+war {
+    webInf { from 'src/main/resources' } // adds a file-set to the WEB-INF dir.
+}
